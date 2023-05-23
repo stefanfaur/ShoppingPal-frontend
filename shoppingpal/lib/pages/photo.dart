@@ -58,12 +58,16 @@ class _PhotoPageState extends State<PhotoPage> {
                     ),
             ),
             CustomButton(
-                title: 'Insert Image',
-                onClick: () => getImage(ImageSource.gallery)),
+              title: 'Insert Image',
+              onClick: () => getImage(ImageSource.gallery),
+              icon: Icons.photo_camera,
+            ),
             const SizedBox(height: 15),
             CustomButton(
-                title: 'Take Photo',
-                onClick: () => getImage(ImageSource.camera))
+              title: 'Take Photo',
+              onClick: () => getImage(ImageSource.camera),
+              icon: Icons.collections,
+            ),
           ],
         ),
       ),
@@ -74,17 +78,19 @@ class _PhotoPageState extends State<PhotoPage> {
 Widget CustomButton({
   required String title,
   required VoidCallback onClick,
+  required IconData icon,
 }) {
   return Container(
-    child: ElevatedButton(
+    child: ElevatedButton.icon(
       onPressed: onClick,
       style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromRGBO(93, 184, 226, 1),
-          fixedSize: const Size(150, 50),
-          textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
-      child: Text(title),
+        backgroundColor: Color.fromRGBO(233, 128, 0, 1),
+        fixedSize: const Size(180, 60),
+        textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      ),
+      icon: Icon(icon),
+      label: Center(child: Text(title)),
     ),
   );
 }
