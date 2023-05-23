@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'dart:async';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart';
 
 class PhotoPage extends StatefulWidget {
   const PhotoPage({super.key});
@@ -8,19 +14,56 @@ class PhotoPage extends StatefulWidget {
 }
 
 class _PhotoPageState extends State<PhotoPage> {
+  File? _image;
+
+  Future getImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+
+      final imagePermanent = await saveFilePermanently(image.path);
+
+      setState(() {
+        _image = imagePermanent;
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
+//  directory documentation:
+//  https://docs.flutter.dev/cookbook/persistence/reading-writing-files
+  Future<File> saveFilePermanently(String imagePath) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final name = basename(imagePath);
+    final image = File('${directory.path}/$name');
+
+    return File(imagePath).copy(image.path);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
         child: Column(
           children: [
-            const SizedBox(
-              height: 250,
-              width: 250,
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: _image != null
+                  ? Image.file(_image!,
+                      width: 250, height: 250, fit: BoxFit.cover)
+                  : const SizedBox(
+                      height: 250,
+                      width: 250,
+                    ),
             ),
-            CustomButton(title: 'Insert Image', onClick: () => {}),
+            CustomButton(
+                title: 'Insert Image',
+                onClick: () => getImage(ImageSource.gallery)),
             const SizedBox(height: 15),
-            CustomButton(title: 'Take Photo', onClick: () => {})
+            CustomButton(
+                title: 'Take Photo',
+                onClick: () => getImage(ImageSource.camera))
           ],
         ),
       ),
@@ -36,7 +79,7 @@ Widget CustomButton({
     child: ElevatedButton(
       onPressed: onClick,
       style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromRGBO(220, 121, 0, 1),
+          backgroundColor: Color.fromRGBO(93, 184, 226, 1),
           fixedSize: const Size(150, 50),
           textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
           shape:
