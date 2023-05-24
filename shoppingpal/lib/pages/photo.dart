@@ -78,7 +78,7 @@ class _PhotoPageState extends State<PhotoPage> {
 Widget CustomButton({
   required String title,
   required VoidCallback onClick,
-  required IconData icon,
+  IconData? icon,
 }) {
   return Container(
     child: ElevatedButton.icon(
@@ -89,7 +89,7 @@ Widget CustomButton({
         textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
-      icon: Icon(icon),
+      icon: icon != null ? Icon(icon) : Container(),
       label: Center(child: Text(title)),
     ),
   );
