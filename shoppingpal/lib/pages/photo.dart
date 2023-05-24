@@ -48,7 +48,7 @@ class _PhotoPageState extends State<PhotoPage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(15.0),
               child: _image != null
                   ? Image.file(_image!,
                       width: 300, height: 400, fit: BoxFit.cover)
@@ -64,6 +64,16 @@ class _PhotoPageState extends State<PhotoPage> {
               title: 'Take Photo',
               onClick: () => getImage(ImageSource.camera),
               icon: Icons.collections,
+            ),
+            const SizedBox(height: 15),
+            Container(
+              child: _image != null
+                  ? CustomButton(
+                      title: 'Submit',
+                      onClick: () => {},
+                      icon: Icons.done,
+                    )
+                  : Container(),
             ),
           ],
         ),
