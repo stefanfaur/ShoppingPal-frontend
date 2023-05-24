@@ -51,11 +51,8 @@ class _PhotoPageState extends State<PhotoPage> {
               padding: const EdgeInsets.all(10.0),
               child: _image != null
                   ? Image.file(_image!,
-                      width: 250, height: 250, fit: BoxFit.cover)
-                  : const SizedBox(
-                      height: 250,
-                      width: 250,
-                    ),
+                      width: 300, height: 400, fit: BoxFit.cover)
+                  : const SizedBox(height: 250),
             ),
             CustomButton(
               title: 'Insert Image',
