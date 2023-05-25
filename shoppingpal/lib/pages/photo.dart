@@ -5,6 +5,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
+import 'package:shoppingpal/services/image.dart';
 
 class PhotoPage extends StatefulWidget {
   const PhotoPage({super.key});
@@ -26,6 +27,13 @@ class _PhotoPageState extends State<PhotoPage> {
       setState(() {
         _image = imagePermanent;
       });
+      // purely testing, uploads as soon as image is selected(no submit)
+      if (_image != null) {
+        Map<String, dynamic> response = await uploadImage(_image!);
+        print(response);
+      }
+      // remove later
+      // TODO: call this function when user clicks submit
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
