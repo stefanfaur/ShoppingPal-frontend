@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shoppingpal/pages/photo.dart';
+import 'package:shoppingpal/pages/utils.dart';
 
 import '../main.dart';
 
@@ -47,6 +48,8 @@ class _SignupPageState extends State<SignupPage> {
       );
     } on FirebaseAuthException catch (e) {
       print(e);
+
+      Utils.showSnackBar(e.message);
     }
 
     navigatorKey.currentState!.popUntil((route) => route.isFirst);

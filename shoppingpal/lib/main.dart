@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shoppingpal/pages/auth_page.dart';
 import 'package:shoppingpal/pages/main_page.dart';
+import 'package:shoppingpal/pages/utils.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        scaffoldMessengerKey: Utils.messengerKey,
         navigatorKey: navigatorKey,
         home: Scaffold(
           appBar: AppBar(
