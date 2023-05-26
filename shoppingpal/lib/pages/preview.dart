@@ -108,6 +108,7 @@ class _PreviewPageState extends State<PreviewPage> {
                     list_to_json(_items),
                     Navigator.pop(context, true),
                     getUserID.getUID(),
+                    getUserID.getUserEmail(),
                   },
                 ),
               ),

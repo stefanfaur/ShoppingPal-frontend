@@ -12,6 +12,7 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
   @override
   void initState() {
     getUserID.getUID();
+    getUserID.getUserEmail();
     super.initState();
   }
 
