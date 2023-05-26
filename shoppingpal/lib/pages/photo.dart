@@ -40,14 +40,25 @@ class _PhotoPageState extends State<PhotoPage> {
     }
   }
 
-//  directory documentation:
-//  https://docs.flutter.dev/cookbook/persistence/reading-writing-files
   Future<File> saveFilePermanently(String imagePath) async {
     final directory = await getApplicationDocumentsDirectory();
     final name = basename(imagePath);
     final image = File('${directory.path}/$name');
 
     return File(imagePath).copy(image.path);
+  }
+
+  void navigateToSecondScreen(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PreviewPage()),
+    );
+
+    if (result == true) {
+      setState(() {
+        _image = null;
+      });
+    }
   }
 
   @override
@@ -80,11 +91,7 @@ class _PhotoPageState extends State<PhotoPage> {
                   ? CustomButton(
                       title: 'Submit',
                       onClick: () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PreviewPage()),
-                        ),
+                        navigateToSecondScreen(context),
                       },
                       icon: Icons.done,
                     )
