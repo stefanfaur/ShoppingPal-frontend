@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shoppingpal/pages/photo.dart';
 import 'package:shoppingpal/services/image.dart';
 
@@ -47,8 +44,11 @@ class _PreviewPageState extends State<PreviewPage> {
                       itemCount: _items.length,
                       itemBuilder: (context, index) {
                         return Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
                           key: ValueKey(_items[index]["id"]),
-                          margin: const EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(8),
                           color: const Color.fromARGB(255, 255, 164, 53),
                           child: ListTile(
                               leading: const Icon(Icons.radio_button_checked),
@@ -107,7 +107,7 @@ Widget CustomTextField({
   required String description,
 }) {
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(6.0),
     child: TextField(
       onChanged: (value) => {print(value)},
       decoration: InputDecoration(
@@ -121,9 +121,13 @@ Widget CustomTextField({
         filled: true,
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(10.0),
+            Radius.circular(20.0),
           ),
           borderSide: BorderSide.none,
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 10,
         ),
       ),
     ),
