@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shoppingpal/pages/photo.dart';
 import 'package:shoppingpal/services/image.dart';
@@ -24,6 +26,19 @@ class _PreviewPageState extends State<PreviewPage> {
         item["unitPrice"] = item["unitPrice"].toString();
       }
     });
+  }
+
+  void list_to_json(List items) {
+    for (var item in items) {
+      int qty = int.parse(item["qty"]);
+      double unitPrice = double.parse(item["unitPrice"]);
+
+      item["qty"] = qty;
+      item["unitPrice"] = unitPrice;
+    }
+    String jsonNew = jsonEncode(items);
+
+    print(jsonNew);
   }
 
   @override
@@ -89,7 +104,9 @@ class _PreviewPageState extends State<PreviewPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: CustomButton(
                   title: 'Submit',
-                  onClick: () => {},
+                  onClick: () => {
+                    list_to_json(_items),
+                  },
                 ),
               ),
             ),
@@ -109,7 +126,8 @@ Widget CustomTextField({
   return Padding(
     padding: const EdgeInsets.all(6.0),
     child: TextField(
-      onChanged: (value) => {print(value)},
+      textCapitalization: TextCapitalization.characters,
+      onChanged: (value) => {items[index][title] = value.toUpperCase()},
       decoration: InputDecoration(
         labelText: description,
         floatingLabelBehavior: FloatingLabelBehavior.always,
