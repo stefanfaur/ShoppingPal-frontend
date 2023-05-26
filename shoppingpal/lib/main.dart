@@ -1,7 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:shoppingpal/pages/login_page.dart';
 import 'package:shoppingpal/pages/main_page.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -16,7 +22,15 @@ class MyApp extends StatelessWidget {
         backgroundColor: Color.fromRGBO(255, 140, 0, 1),
         title: const Center(child: Text('ShoppingPal')),
       ),
-      body: MainPage(),
+      body: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return MainPage();
+            } else {
+              return LoginPage();
+            }
+          }),
     ));
   }
 }

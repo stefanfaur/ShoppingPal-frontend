@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "285118770892",
+    "project_id": "shoppingpal-login",
+    "storage_bucket": "shoppingpal-login.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285118770892:android:23ceafeabe012b765c5c69",
+        "android_client_info": {
+          "package_name": "com.example.shoppingpal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC29ZfFhCKPA0tJF_n3DHVY1WZOzVfIHug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
