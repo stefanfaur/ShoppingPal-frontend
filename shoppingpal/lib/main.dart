@@ -11,26 +11,34 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        navigatorKey: navigatorKey,
         home: Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(255, 140, 0, 1),
-        title: const Center(child: Text('ShoppingPal')),
-      ),
-      body: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return MainPage();
-            } else {
-              return LoginPage();
-            }
-          }),
-    ));
+          appBar: AppBar(
+            backgroundColor: Color.fromRGBO(255, 140, 0, 1),
+            title: const Center(child: Text('ShoppingPal')),
+          ),
+          body: StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return const Center(child: Text('Something went wrong!'));
+                }
+                if (snapshot.hasData) {
+                  return MainPage();
+                } else {
+                  return LoginPage();
+                }
+              }),
+        ));
   }
 }

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shoppingpal/pages/photo.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
+
     return Container(
         child: Center(
       child: Column(
@@ -16,20 +19,25 @@ class AccountPage extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
                 border: Border(bottom: BorderSide(width: 0.5))),
-            child: const Center(
+            child: Center(
               child: Column(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.account_circle_sharp,
                     size: 100,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
-                  Text('etrusc1 - parola de la db',
-                      style:
-                          TextStyle(fontSize: 21, fontWeight: FontWeight.bold)),
-                  SizedBox(
+                  Text(
+                    'Signed in as:\n${user.email!}',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
                     height: 40,
                   ),
                 ],
@@ -41,7 +49,8 @@ class AccountPage extends StatelessWidget {
           ),
           CustomButton(
             title: 'Sign Out',
-            onClick: () => {},
+            onClick: () => FirebaseAuth.instance.signOut(),
+            icon: Icons.arrow_back,
           ),
         ],
       ),

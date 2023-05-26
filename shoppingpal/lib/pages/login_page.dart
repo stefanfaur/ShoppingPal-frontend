@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoppingpal/pages/photo.dart';
+import 'package:shoppingpal/main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,10 +23,22 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
     );
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
   @override
@@ -56,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 20),
           CustomButton(
             title: 'Sign In',
-            onClick: () => {},
+            onClick: signIn,
             icon: Icons.lock_open,
           ),
         ],
