@@ -5,6 +5,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
+import 'package:shoppingpal/pages/getUserID.dart';
 import 'package:shoppingpal/pages/preview.dart';
 
 File? _tempImage;
@@ -92,6 +93,7 @@ class _PhotoPageState extends State<PhotoPage> {
                       title: 'Submit',
                       onClick: () => {
                         navigateToSecondScreen(context),
+                        getUserID.getUID(),
                       },
                       icon: Icons.done,
                     )
