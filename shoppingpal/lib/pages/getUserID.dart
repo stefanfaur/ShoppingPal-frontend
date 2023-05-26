@@ -8,4 +8,11 @@ class getUserID {
     final uid = user.uid;
     return uid;
   }
+
+  static String? getUserEmail() {
+    final User user = auth.currentUser!;
+    final userEmail = user.email;
+    print(userEmail);
+    return userEmail;
+  }
 }

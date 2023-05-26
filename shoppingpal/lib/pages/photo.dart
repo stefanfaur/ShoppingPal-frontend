@@ -94,6 +94,7 @@ class _PhotoPageState extends State<PhotoPage> {
                       onClick: () => {
                         navigateToSecondScreen(context),
                         getUserID.getUID(),
+                        getUserID.getUserEmail(),
                       },
                       icon: Icons.done,
                     )
