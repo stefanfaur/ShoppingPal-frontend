@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:shoppingpal/pages/getUserID.dart';
 import 'package:shoppingpal/pages/photo.dart';
 import 'package:shoppingpal/services/image.dart';
 
@@ -106,6 +107,7 @@ class _PreviewPageState extends State<PreviewPage> {
                   onClick: () => {
                     list_to_json(_items),
                     Navigator.pop(context, true),
+                    getUserID.getUID(),
                   },
                 ),
               ),
