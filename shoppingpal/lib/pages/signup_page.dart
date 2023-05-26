@@ -1,21 +1,25 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
+import 'package:shoppingpal/pages/main_page.dart';
 import 'package:shoppingpal/pages/photo.dart';
-import 'package:shoppingpal/main.dart';
 
-class LoginPage extends StatefulWidget {
-  final VoidCallback onClickedSignUp;
+import '../main.dart';
 
-  const LoginPage({
+class SignupPage extends StatefulWidget {
+  final Function() onClickedSignIn;
+
+  const SignupPage({
     Key? key,
-    required this.onClickedSignUp,
+    required this.onClickedSignIn,
   }) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -27,15 +31,9 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  Future signIn() async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const Center(child: CircularProgressIndicator()),
-    );
-
+  Future signUp() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
@@ -73,14 +71,14 @@ class _LoginPageState extends State<LoginPage> {
           ),
           const SizedBox(height: 20),
           CustomButton(
-            title: 'Sign In',
-            onClick: signIn,
+            title: 'Sign Up',
+            onClick: signUp,
             icon: Icons.lock_open,
           ),
           const SizedBox(height: 20),
           CustomButton(
-            title: 'Sign Up',
-            onClick: widget.onClickedSignUp,
+            title: 'Login',
+            onClick: widget.onClickedSignIn,
             icon: Icons.person_add,
           ),
         ],
