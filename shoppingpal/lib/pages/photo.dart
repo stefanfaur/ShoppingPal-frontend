@@ -5,7 +5,13 @@ import 'dart:io';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
-import 'package:shoppingpal/services/image.dart';
+import 'package:shoppingpal/pages/preview.dart';
+
+File? _tempImage;
+
+File? get_image() {
+  return _tempImage;
+}
 
 class PhotoPage extends StatefulWidget {
   const PhotoPage({super.key});
@@ -27,26 +33,32 @@ class _PhotoPageState extends State<PhotoPage> {
       setState(() {
         _image = imagePermanent;
       });
-      // purely testing, uploads as soon as image is selected(no submit)
-      if (_image != null) {
-        Map<String, dynamic> response = await uploadImage(_image!);
-        print(response);
-      }
-      // remove later
-      // TODO: call this function when user clicks submit
+
+      _tempImage = _image;
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
   }
 
-//  directory documentation:
-//  https://docs.flutter.dev/cookbook/persistence/reading-writing-files
   Future<File> saveFilePermanently(String imagePath) async {
     final directory = await getApplicationDocumentsDirectory();
     final name = basename(imagePath);
     final image = File('${directory.path}/$name');
 
     return File(imagePath).copy(image.path);
+  }
+
+  void navigateToSecondScreen(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PreviewPage()),
+    );
+
+    if (result == true) {
+      setState(() {
+        _image = null;
+      });
+    }
   }
 
   @override
@@ -78,7 +90,9 @@ class _PhotoPageState extends State<PhotoPage> {
               child: _image != null
                   ? CustomButton(
                       title: 'Submit',
-                      onClick: () => {},
+                      onClick: () => {
+                        navigateToSecondScreen(context),
+                      },
                       icon: Icons.done,
                     )
                   : Container(),
