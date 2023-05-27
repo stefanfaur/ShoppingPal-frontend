@@ -3,6 +3,8 @@
 ShoppingPal is a project designed to help users keep track of their spending by letting them save receipts details by taking a picture and then getting useful statistics about thei spendings. The project is built using Flutter and Firebase on the frontend. 
 The backend is build using FastAPI and PostgreSQL and its repo can be found [here.](https://github.com/stefanfaur/ShoppingPal-backend)
 
+**DEMO VIDEO [HERE](https://youtu.be/Wb0_WQtoTw8)**
+
 # ShoppingPal Documentation Table of Contents
 
 1.  [Project Requirements](#project-requirements)
