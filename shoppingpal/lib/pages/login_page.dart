@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shoppingpal/pages/getUserID.dart';
 import 'package:shoppingpal/pages/photo.dart';
 import 'package:shoppingpal/main.dart';
 import 'package:shoppingpal/pages/utils.dart';
+import 'package:shoppingpal/services/signup_to_db.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback onClickedSignUp;
@@ -44,6 +46,8 @@ class _LoginPageState extends State<LoginPage> {
       print(e);
 
       Utils.showSnackBar(e.message);
+    } finally {
+      createUser(getUserID.getUID(), getUserID.getUserEmail()!);
     }
 
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
