@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shoppingpal/pages/getUserID.dart';
 import 'package:shoppingpal/pages/photo.dart';
 import 'package:shoppingpal/pages/utils.dart';
-
+import 'package:shoppingpal/services/signup_to_db.dart';
 import '../main.dart';
 
 class SignupPage extends StatefulWidget {
@@ -50,6 +51,8 @@ class _SignupPageState extends State<SignupPage> {
       print(e);
 
       Utils.showSnackBar(e.message);
+    } finally {
+      createUser(getUserID.getUID(), getUserID.getUserEmail()!);
     }
 
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
