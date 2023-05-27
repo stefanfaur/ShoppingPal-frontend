@@ -96,9 +96,9 @@ The project consists of several key components:
     
 4.  **LoginPage**: This page is used for user authentication. It allows users to sign in using their email and password.
     
-5.  **MainPage**: This is the root of the app. It initializes Firebase and sets up the main MaterialApp.
+5.  **MainPage**: This is the body of the app. It changes according to which page you are on.
     
-6.  **AuthPage**: This page handles user authentication. It allows users to sign in or sign up.
+6.  **AuthPage**: This page handles user authentication. It verifies if a user has already logged in, so it doesn't need to do it again.
     
 7.  **PhotoPage**: This page allows users to take a picture of their receipt, which is then processed and saved.
     
@@ -107,8 +107,6 @@ The project consists of several key components:
 9.  **SaveReceipt**: This service is responsible for saving the receipt details to the database.
     
 10.  **ImageService**: This service handles the image processing part of the app.
-    
-11.  **FirebaseAuth**: This is used for user authentication.
 
 ## ShoppingListPage
 
@@ -180,16 +178,6 @@ The `ImageService` handles the image processing part of the app. It is used in t
 -   `getImage()`: This method allows the user to take a picture or select an image from their device. It uses the `ImagePicker` plugin to access the device's camera or gallery.
     
 -   `saveFilePermanently()`: This method saves the image file permanently on the device. It takes the path of the image file as an argument and copies the file to the application's documents directory.
-
-## FirebaseAuth
-
-FirebaseAuth is used for user authentication. It is used in both the `LoginPage` and `AuthPage` for signing in and signing up users respectively.
-
--   `signIn()`: This method signs in the user using their email and password. It uses the `signInWithEmailAndPassword()` method from Firebase Auth. If the sign-in process fails, it shows a snack bar with the error message.
-    
--   `signUp()`: This method signs up the user using their email and password. It uses the `createUserWithEmailAndPassword()` method from Firebase Auth. If the sign-up process fails, it shows a snack bar with the error message.
-    
--   `authStateChanges()`: This method returns a Stream of `User` objects representing the user's authentication state. It is used in the `MainPage` to switch between the `MainPage` and `AuthPage` depending on whether the user is signed in or not.
 
 ## Integration with the Backend API
 
