@@ -18,7 +18,6 @@ The backend is build using FastAPI and PostgreSQL and its repo can be found [her
     -   [Show Items](#showitems)
     -   [Save Receipt](#savereceipt)
     -   [Image Service](#imageservice)
-    -   [Firebase Auth](#firebaseauth)
 4.  [Integration with the Backend API](#integration-with-the-backend-api)
 
 ## Project Requirements
