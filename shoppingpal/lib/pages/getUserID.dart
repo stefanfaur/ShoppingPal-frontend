@@ -12,7 +12,6 @@ class getUserID {
   static String? getUserEmail() {
     final User user = auth.currentUser!;
     final userEmail = user.email;
-    print(userEmail);
     return userEmail;
   }
 }

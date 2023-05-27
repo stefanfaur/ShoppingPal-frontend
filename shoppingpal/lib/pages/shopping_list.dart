@@ -19,7 +19,7 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(child: Text("Shopping List")),
+      child: const Center(child: Text("Shopping List")),
     );
   }
 }

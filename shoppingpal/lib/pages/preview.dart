@@ -30,7 +30,7 @@ class _PreviewPageState extends State<PreviewPage> {
 
   void list_to_json(List items) {
     for (var item in items) {
-      int qty = int.parse(item["qty"]);
+      double qty = double.parse(item["qty"]);
       double unitPrice = double.parse(item["unitPrice"]);
 
       item["qty"] = qty;
