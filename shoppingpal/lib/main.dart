@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         navigatorKey: navigatorKey,
         home: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color.fromRGBO(255, 140, 0, 1),
+            backgroundColor: const Color.fromRGBO(255, 140, 0, 1),
             title: const Center(child: Text('ShoppingPal')),
           ),
           body: StreamBuilder<User?>(

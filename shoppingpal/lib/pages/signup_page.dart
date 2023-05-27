@@ -64,7 +64,21 @@ class _SignupPageState extends State<SignupPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 40),
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: const EdgeInsets.only(
+                top: 0,
+                bottom: 34,
+              ),
+              child: const Text(
+                'Create a new account!',
+                style: TextStyle(
+                  fontFamily: 'Roboto-Medium',
+                  fontSize: 40,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
             TextFormField(
               controller: emailController,
               cursorColor: Colors.white,

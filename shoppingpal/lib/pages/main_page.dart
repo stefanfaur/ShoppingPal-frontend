@@ -24,12 +24,15 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 238, 238, 238),
       body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
           //theme
+          backgroundColor: const Color.fromARGB(255, 224, 123, 0),
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: const Color.fromRGBO(255, 140, 0, 1),
-          unselectedItemColor: Colors.grey.withOpacity(0.5),
+          selectedItemColor: const Color.fromARGB(255, 89, 182, 225),
+          unselectedItemColor:
+              const Color.fromARGB(255, 255, 255, 255).withOpacity(1),
           //pageChange
           onTap: onTap,
           currentIndex: selectedIndex,
