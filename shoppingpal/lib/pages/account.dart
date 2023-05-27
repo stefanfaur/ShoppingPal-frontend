@@ -35,6 +35,7 @@ class AccountPage extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 21,
                       fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 36, 36, 36),
                     ),
                   ),
                   const SizedBox(

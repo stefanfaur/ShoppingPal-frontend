@@ -116,7 +116,7 @@ Widget CustomButton({
     child: ElevatedButton.icon(
       onPressed: onClick,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromRGBO(233, 128, 0, 1),
+        backgroundColor: const Color.fromARGB(255, 89, 182, 225),
         fixedSize: const Size(180, 60),
         textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
