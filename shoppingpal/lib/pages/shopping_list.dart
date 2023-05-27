@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:shoppingpal/pages/getUserID.dart';
-import 'package:shoppingpal/pages/preview.dart';
+import 'package:shoppingpal/pages/showItems.dart';
+import 'package:path/path.dart';
 
 class ShoppingListPage extends StatefulWidget {
   const ShoppingListPage({super.key});
@@ -54,6 +53,14 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
 
   List receipts = receiptsJSON["receipts"];
 
+  void switchScreen(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ShowItems(),
+        ));
+  }
+
   @override
   void initState() {
     getUserID.getUID();
@@ -84,6 +91,9 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
                     shop_name: "shop_name",
                     date: "date",
                     total: "total",
+                    onClick: () => {
+                      switchScreen(context),
+                    },
                   ),
                 ],
               ));
@@ -99,9 +109,10 @@ Widget CustomListButton({
   required String shop_name,
   required String date,
   required String total,
+  required VoidCallback onClick,
 }) {
   return ElevatedButton(
-    onPressed: () => {},
+    onPressed: onClick,
     child: Column(
       children: [
         Text('Shop Name: ${receipts[index][shop_name]}'),
