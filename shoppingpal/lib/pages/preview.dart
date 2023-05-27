@@ -14,6 +14,10 @@ class PreviewPage extends StatefulWidget {
 class _PreviewPageState extends State<PreviewPage> {
   List _items = [];
   final _image = get_image();
+  String merchant_name = '';
+  String date = '';
+  double total = 0.0;
+  Map<String, dynamic> finalJSON = {};
 
   // Fetch content from the json file
   Future<void> readJson() async {
@@ -26,9 +30,13 @@ class _PreviewPageState extends State<PreviewPage> {
         item["unitPrice"] = item["unitPrice"].toString();
       }
     });
+
+    merchant_name = data["merchant_name"];
+    date = data["date"];
+    total = data["total"];
   }
 
-  void list_to_json(List items) {
+  String list_to_json(List items) {
     for (var item in items) {
       double qty = double.parse(item["qty"]);
       double unitPrice = double.parse(item["unitPrice"]);
@@ -36,9 +44,16 @@ class _PreviewPageState extends State<PreviewPage> {
       item["qty"] = qty;
       item["unitPrice"] = unitPrice;
     }
-    String jsonNew = jsonEncode(items);
+    Map<String, dynamic> tempMap = {
+      'merchant_name': merchant_name,
+      'date': date,
+      'total': total,
+      'items': items
+    };
 
-    print(jsonNew);
+    String jsonNew = jsonEncode(tempMap);
+
+    return jsonNew;
   }
 
   @override
