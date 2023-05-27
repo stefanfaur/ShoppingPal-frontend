@@ -24,6 +24,8 @@ The backend is build using FastAPI and PostgreSQL and its repo can be found [her
 
 To run the project, make sure you have Flutter installed. We recommend using `Visual Studio Code` with the `Flutter` extension. The following are necessary to set up the project:
 
+MOST IMPORTANT: MAKE SURE "localhost" IS CHANGED TO YOUR NETWORK INTERFACE IP IN ALL FILES IN "services" DIRECTORY
+
 1.  **Install Flutter:** You can find the installation guide [here](https://flutter.dev/docs/get-started/install).
     
 2.  **Verify Flutter Installation:** After installing Flutter, run the following command to verify that Flutter is installed and configured correctly:
