@@ -9,7 +9,7 @@ Future<Map<String, dynamic>> uploadImage(File imageFile) async {
 
   // this ip always changes as the router assigns it
   // TODO: eventually run the backend in the cloud with a static ip
-  var uri = Uri.parse("http://192.168.2.139:8000/upload-image/");
+  var uri = Uri.parse("http://localhost:8000/upload-image/");
   var request = http.MultipartRequest("POST", uri);
   request.headers.addAll({
     'Content-Type': 'multipart/form-data',

@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 
 Future<http.Response> saveReceipt(String userId, String jsonData) async {
-  var url = Uri.parse('http://172.20.10.2:8000/save-receipt/?user_id=$userId');
+  var url = Uri.parse('http://localhost:8000/save-receipt/?user_id=$userId');
 
   var response = await http.post(
     url,
