@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shoppingpal/pages/getUserID.dart';
 import 'package:shoppingpal/pages/photo.dart';
 import 'package:shoppingpal/services/image.dart';
+import 'package:shoppingpal/services/save_receipt.dart';
 
 class PreviewPage extends StatefulWidget {
   const PreviewPage({super.key});
@@ -38,8 +39,8 @@ class _PreviewPageState extends State<PreviewPage> {
 
   String list_to_json(List items) {
     for (var item in items) {
-      double qty = double.parse(item["qty"]);
-      double unitPrice = double.parse(item["unitPrice"]);
+      double qty = double.parse(item["qty"].toString());
+      double unitPrice = double.parse(item["unitPrice"].toString());
 
       item["qty"] = qty;
       item["unitPrice"] = unitPrice;
@@ -52,8 +53,11 @@ class _PreviewPageState extends State<PreviewPage> {
     };
 
     String jsonNew = jsonEncode(tempMap);
-
     return jsonNew;
+  }
+
+  Future<void> uploadReceipt(String jsonData) async {
+    await saveReceipt(getUserID.getUID(), jsonData);
   }
 
   @override
@@ -120,7 +124,9 @@ class _PreviewPageState extends State<PreviewPage> {
                 child: CustomButton(
                   title: 'Submit',
                   onClick: () => {
-                    list_to_json(_items),
+                    print("TEST"),
+                    print(list_to_json(_items)),
+                    uploadReceipt(list_to_json(_items)),
                     Navigator.pop(context, true),
                     getUserID.getUID(),
                     getUserID.getUserEmail(),
