@@ -1,63 +1,28 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shoppingpal/pages/getUserID.dart';
 import 'package:shoppingpal/pages/showItems.dart';
-import 'package:path/path.dart';
+import 'package:shoppingpal/services/get_user_receipts.dart';
 
 class ShoppingListPage extends StatefulWidget {
   const ShoppingListPage({super.key});
+
+  Future<Map<String, dynamic>> getUserReceiptList() async {
+    var response = await getUserReceipts(getUserID.getUID());
+    return response;
+  }
 
   @override
   State<ShoppingListPage> createState() => _ShoppingListPageState();
 }
 
 class _ShoppingListPageState extends State<ShoppingListPage> {
-  static String receiptsResponse = '''{
-  "receipts": [
-    {
-      "id": 5,
-      "total": 39.83,
-      "user_id": "BimtoTlu2IMu8zI0gv9CScJtNa82",
-      "name": "Nume Casier",
-      "shop_name": "Nume Casier",
-      "date": "2023-05-27T17:48:09.244567"
-    },
-    {
-      "id": 1,
-      "total": 123.45,
-      "user_id": "BimtoTlu2IMu8zI0gv9CScJtNa82",
-      "name": "test_merchant",
-      "shop_name": "test_merchant",
-      "date": "2023-05-27T05:32:03.345332"
-    },
-    {
-      "id": 6,
-      "total": 39.83,
-      "user_id": "BimtoTlu2IMu8zI0gv9CScJtNa82",
-      "name": "Nume Casier",
-      "shop_name": "Nume Casier",
-      "date": "2023-05-27T17:56:30.937540"
-    },
-    {
-      "id": 7,
-      "total": 39.83,
-      "user_id": "BimtoTlu2IMu8zI0gv9CScJtNa82",
-      "name": "Nume Casier",
-      "shop_name": "Nume Casier",
-      "date": "2023-05-27T17:58:58.268098"
-    }
-  ]
-}''';
+  List receipts = [];
 
-  static final receiptsJSON = jsonDecode(receiptsResponse);
-
-  List receipts = receiptsJSON["receipts"];
-
-  void switchScreen(BuildContext context) {
+  void switchScreen(BuildContext context, int id) {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const ShowItems(),
+          builder: (context) => ShowItems(id: id),
         ));
   }
 
@@ -66,8 +31,12 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
     getUserID.getUID();
     getUserID.getUserEmail();
     super.initState();
-    print(receiptsJSON);
-    print(receipts.length);
+    widget.getUserReceiptList().then((res) {
+      setState(() {
+        Map<String, dynamic> receiptsJSON = res;
+        receipts = receiptsJSON["receipts"];
+      });
+    });
   }
 
   @override
@@ -92,7 +61,7 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
                     date: "date",
                     total: "total",
                     onClick: () => {
-                      switchScreen(context),
+                      switchScreen(context, receipts[index]["id"]),
                     },
                   ),
                 ],
